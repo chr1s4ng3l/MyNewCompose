@@ -6,10 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,7 +28,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MyBox()
+
+                    MyStateExample()
                 }
             }
         }
@@ -54,6 +52,7 @@ fun MyColumn() {
 @Composable
 fun MyBox() {
     Column() {
+        MySpacer(size = 20)
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -88,6 +87,7 @@ fun MyBox() {
             }
         }
 
+        MySpacer(size = 20)
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -97,6 +97,8 @@ fun MyBox() {
         ) {
             Text(text = "4")
         }
+        MySpacer(size = 20)
+
     }
 }
 
@@ -104,6 +106,27 @@ fun MyBox() {
 fun MySpacer(size: Int) {
 
     Spacer(modifier = Modifier.height(size.dp))
+
+}
+
+
+@Composable
+fun MyStateExample() {
+    var counter = 0
+
+    Column(
+        Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        Button(onClick = { counter += 1 }) {
+            Text(text = "Click here")
+
+        }
+        Text(text = "I've been click $counter times")
+
+    }
 
 }
 
@@ -116,6 +139,6 @@ fun MySpacer(size: Int) {
 @Composable
 fun DefaultPreview() {
     MyNewComposeTheme {
-        MyBox()
+        MyStateExample()
     }
 }
