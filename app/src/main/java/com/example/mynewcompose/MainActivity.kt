@@ -11,6 +11,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Device
@@ -30,19 +31,80 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    MyBox()
                 }
             }
         }
     }
 }
 
+
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hi mi name is $name", modifier = Modifier
-        .height(20.dp)
-        .fillMaxWidth()
-        .size(30.dp))
+fun MyColumn() {
+    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceBetween) {
+        Text(text = "Hola", modifier = Modifier.background(Color.Green))
+        Text(text = "Hola", modifier = Modifier.background(Color.Cyan))
+        Text(text = "Hola", modifier = Modifier.background(Color.Yellow))
+        Text(text = "Hola", modifier = Modifier.background(Color.Red))
+
+    }
+
+}
+
+@Composable
+fun MyBox() {
+    Column() {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .weight(1f)
+                .background(Color.Blue), Alignment.Center
+        ) {
+            Text(text = "1")
+        }
+
+        MySpacer(20)
+        Row(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .weight(1f)
+                    .background(Color.Yellow), Alignment.Center
+            ) {
+                Text(text = "2")
+            }
+
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .weight(1f)
+                    .background(Color.DarkGray), contentAlignment = Alignment.Center
+            ) {
+                Text(text = "3")
+            }
+        }
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .weight(1f)
+                .background(Color.Red),
+            Alignment.BottomCenter
+        ) {
+            Text(text = "4")
+        }
+    }
+}
+
+@Composable
+fun MySpacer(size: Int) {
+
+    Spacer(modifier = Modifier.height(size.dp))
+
 }
 
 
@@ -50,11 +112,10 @@ fun Greeting(name: String) {
     showBackground = true,
     showSystemUi = true,
     device = Devices.DEFAULT,
-    apiLevel = 33
 )
 @Composable
 fun DefaultPreview() {
     MyNewComposeTheme {
-        Greeting("Android")
+        MyBox()
     }
 }
